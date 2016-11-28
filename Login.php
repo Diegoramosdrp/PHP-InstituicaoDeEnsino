@@ -24,14 +24,14 @@
                             <div class="form-group">
                                 <label for="usuario" class="col-lg-6 control-label">Usuário :</label>
                                 <div class="col-lg-6">
-                                    <input class="form-control" id="usuario" placeholder="Digite Usuário" type="text">
+                                    <input class="form-control" name="usuario" placeholder="Digite Usuário" type="text">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="senha" class="col-lg-6 control-label">Senha :</label>
                                 <div class="col-lg-6">
-                                    <input class="form-control" id="senha" placeholder="Digite Senha" type="password">
+                                    <input class="form-control" name="senha" placeholder="Digite Senha" type="password">
                                 </div>
                             </div>
                             <div class="form-group">
