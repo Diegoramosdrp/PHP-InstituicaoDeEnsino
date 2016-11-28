@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <?php include "Config.php"?>
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -23,11 +24,11 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gerenciamento <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Cadastrar Curso</a></li>
-                            <li><a href="#">Alterar Login</a></li>
+                            <li><a href="login.php">Cadastrar Curso</a></li>
+                            <li><a href="login.php">Alterar Login</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Entrar</a></li>
+                    <li><a href="login.php">Entrar</a></li>
                 </ul>
             </div>
         </div>
