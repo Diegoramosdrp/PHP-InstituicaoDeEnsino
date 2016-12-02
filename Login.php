@@ -3,7 +3,6 @@
 </head>
 <body>
     <?php include 'Template.php'; ?>
-
     <div class="col-lg-offset-1">
         <div class="container">
             <div class="col-sm-11">
@@ -18,7 +17,7 @@
                     ?>
                 </div>
                 <div class="jumbotron">
-                    <form class="form-horizontal" action="index.php" method="POST">
+                    <form class="form-horizontal" action="index.php" method="POST" style="">
                         <fieldset>
                             <legend>Logar</legend>
                             <div class="form-group">
