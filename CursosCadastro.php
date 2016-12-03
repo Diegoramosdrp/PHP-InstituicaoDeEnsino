@@ -14,7 +14,7 @@
                         else if (isset($_GET['curso'])) {
                             echo '<div class="alert-danger form-control">Curso Adicionado</div>';
                         } 
-                        else if (isset ($_GET['alerta'])) {
+                        else if (isset($_GET['alerta'])) {
                             echo '<div class="alert-danger form-control">Preencha Todos Os Campos</div>';
                         }
                         ?>
@@ -49,14 +49,14 @@
                                 <div class="col-lg-6">
                                     <select class="form-control" name="categoria">
                                         <option>-- Selecione Categoria --</option>
-<?php
-$buscar_categorias = $conecao->prepare('SELECT * FROM `categoria`');
-$buscar_categorias->execute();
+                                        <?php
+                                        $buscar_categorias = $conecao->prepare('SELECT * FROM `categoria`');
+                                        $buscar_categorias->execute();
 
-while ($row = $buscar_categorias->fetch()) {
-    echo '<option value=' . $row[id_cat] . '>' . $row[nome_cat] . '</option>';
-}
-?>
+                                        while ($row = $buscar_categorias->fetch()) {
+                                            echo '<option value=' . $row[id_cat] . '>' . $row[nome_cat] . '</option>';
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">+</button>
@@ -73,7 +73,6 @@ while ($row = $buscar_categorias->fetch()) {
             </div>
         </div>
     </div>
-
 
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -97,7 +96,6 @@ while ($row = $buscar_categorias->fetch()) {
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
-
         </div>
     </div>
 </body>

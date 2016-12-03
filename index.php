@@ -5,8 +5,6 @@
     <body>
         <?php 
             include 'Template.php';
-            include 'FuncaoLogin.php';
-            include 'FuncaoCursoCategoria.php';
         ?>
     </body>
 </html>

@@ -5,7 +5,11 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <?php include "Config.php"?>
+    <?php
+        include "Config.php";
+        include 'FuncaoLogin.php';
+        include 'FuncaoCursoCategoria.php';
+    ?>
 </head>
 <body>
     <nav class="navbar navbar-default">
