@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label for="valor" class="col-lg-3 control-label">Valor :</label>
                                 <div class="col-lg-6">
-                                    <input class="form-control" name="valor" placeholder="Digite O Valor Para O Curso" type="text" pattern="[0-9].[0-9][0-9]">
+                                    <input class="form-control" name="valor" placeholder="Digite O Valor Para O Curso" type="text">
                                     <span class="help-block">Digite O Valor Para O Curso Em Reais.</span>
                                 </div>
                             </div>

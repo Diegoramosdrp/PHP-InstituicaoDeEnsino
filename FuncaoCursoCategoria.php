@@ -3,10 +3,16 @@
 <?php
 if (isset($_POST['adicionar'])) {
     $nome = $_POST['nome'];
-    $adiciona_categoria = $conecao->prepare('INSERT INTO `categoria` (`id_cat`, `nome_cat`) VALUES (NULL, :pnome);');
-    $adiciona_categoria->bindValue(':pnome', $nome);
-    $adiciona_categoria->execute();
-    header('location:CursosCadastro.php?categoria');
+
+    if ($nome == NULL) {
+        header('location:CursosCadastro.php?alerta');
+    } 
+    else {        
+        $adiciona_categoria = $conecao->prepare('INSERT INTO `categoria` (`id_cat`, `nome_cat`) VALUES (NULL, :pnome);');
+        $adiciona_categoria->bindValue(':pnome', $nome);
+        $adiciona_categoria->execute();
+        header('location:CursosCadastro.php?categoria');
+    }
 }
 ?>
 
