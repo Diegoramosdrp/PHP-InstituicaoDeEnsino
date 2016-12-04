@@ -7,8 +7,6 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <?php
         include "Config.php";
-        include 'FuncaoLogin.php';
-        include 'FuncaoCursoCategoria.php';
     ?>
 </head>
 <body>
