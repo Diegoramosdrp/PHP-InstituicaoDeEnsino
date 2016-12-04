@@ -3,8 +3,6 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <?php 
-            include 'Template.php';
-        ?>
+        <?php include 'Template.php';?>
     </body>
 </html>

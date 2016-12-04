@@ -6,8 +6,7 @@
         <div class="container">
             <div class="col-sm-11">
                 <div class="col-lg-12">
-                    <div class="col-lg-12">
-                        <?php
+                    <?php
                         if (isset($_GET['categoria'])) {
                             echo '<div class="alert-danger form-control">Categoria Adicionada</div>';
                         } 
@@ -17,59 +16,58 @@
                         else if (isset($_GET['alerta'])) {
                             echo '<div class="alert-danger form-control">Preencha Todos Os Campos</div>';
                         }
-                        ?>
-                    </div>
-                    <form class="form-horizontal jumbotron" action="FuncaoCursoCategoria.php" method="POST">
-                        <fieldset>
-                            <legend>Cadastrar Curso</legend>
-                            <div class="form-group">
-                                <label for="titulo" class="col-lg-3 control-label">Titulo :</label>
-                                <div class="col-lg-6">
-                                    <input class="form-control" name="titulo" placeholder="Digite Titulo Para O Curso" type="text">
-                                </div>
+                    ?>
+                </div>
+                <form class="form-horizontal jumbotron" action="FuncaoCursoCategoria.php" method="POST">
+                    <fieldset>
+                        <legend>Cadastrar Curso</legend>
+                        <div class="form-group">
+                            <label for="titulo" class="col-lg-3 control-label">Titulo :</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="titulo" placeholder="Digite Titulo Para O Curso" type="text">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="descricao" class="col-lg-3 control-label">Descrição :</label>
-                                <div class="col-lg-6">
-                                    <textarea class="form-control" rows="8" name="descricao" placeholder="Digite A Descrição"></textarea>
-                                </div>
+                        <div class="form-group">
+                            <label for="descricao" class="col-lg-3 control-label">Descrição :</label>
+                            <div class="col-lg-6">
+                                <textarea class="form-control" rows="8" name="descricao" placeholder="Digite A Descrição"></textarea>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="valor" class="col-lg-3 control-label">Valor :</label>
-                                <div class="col-lg-6">
-                                    <input class="form-control" name="valor" placeholder="Digite O Valor Para O Curso" type="text">
-                                    <span class="help-block">Digite O Valor Para O Curso Em Reais.</span>
-                                </div>
+                        <div class="form-group">
+                            <label for="valor" class="col-lg-3 control-label">Valor :</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="valor" placeholder="Digite O Valor Para O Curso" type="text">
+                                <span class="help-block">Digite O Valor Para O Curso Em Reais.</span>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="categoria" class="col-lg-3 control-label">Categoria :</label>
-                                <div class="col-lg-6">
-                                    <select class="form-control" name="categoria">
-                                        <option>-- Selecione Categoria --</option>
-                                        <?php
+                        <div class="form-group">
+                            <label for="categoria" class="col-lg-3 control-label">Categoria :</label>
+                            <div class="col-lg-6">
+                                <select class="form-control" name="categoria">
+                                    <option>-- Selecione Categoria --</option>
+                                    <?php
                                         $buscar_categorias = $conecao->prepare('SELECT * FROM `categoria`');
                                         $buscar_categorias->execute();
 
                                         while ($row = $buscar_categorias->fetch()) {
                                             echo '<option value=' . $row[id_cat] . '>' . $row[nome_cat] . '</option>';
                                         }
-                                        ?>
-                                    </select>
-                                </div>
-                                <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">+</button>
+                                    ?>
+                                </select>
                             </div>
+                            <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">+</button>
+                        </div>
 
-                            <div class="form-group">
-                                <div class="col-lg-12 control-label">
-                                    <button type="submit" class="btn btn-success" name="cadastrarcurso">Cadastrar</button>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-lg-12 control-label">
+                                <button type="submit" class="btn btn-success" name="cadastrarcurso">Cadastrar</button>
                             </div>
-                        </fieldset>
-                    </form>
-                </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
