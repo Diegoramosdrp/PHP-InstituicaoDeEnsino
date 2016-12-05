@@ -1,42 +1,37 @@
 <!DOCTYPE html>
-<head></head>
+<head>
+    <meta charset="UTF-8">
+</head>
 <body>
     <?php
-    include 'Template.php';
-    //Adicionar Categoria
-    if (isset($_POST['cadastrarcategoria'])) {
-        $nome = $_POST['nome'];
+    include 'template.php';
 
-        if ($nome == NULL) {
-            header('location:CursosCadastro.php?alerta');
-        } else {
-            $adiciona_categoria = $conecao->prepare('INSERT INTO `categoria` (`id_cat`, `nome_cat`) VALUES (NULL, :pnome);');
-            $adiciona_categoria->bindValue(':pnome', $nome);
-            $adiciona_categoria->execute();
-            header('location:CursosCadastro.php?categoria');
-        }
-    }
 
-    //Adicionar Curso
-    if (isset($_POST['cadastrarcurso'])) {
+
+
+    if (isset($_POST['alterar'])) {
+        $id = $_POST['id'];
         $titulo = $_POST['titulo'];
         $descricao = $_POST['descricao'];
         $valor = $_POST['valor'];
         $categoria = $_POST['categoria'];
-
-        if ($titulo == NULL || $descricao == NULL || $valor == NULL || $categoria == 0) {
-            header('location:CursosCadastro.php?alerta');
-        } else {
-            $adiciona_curso = $conecao->prepare('INSERT INTO `cursos` (`id_curso`, `titulo_curso`, `descricao_curso`, `valor_curso`, `id_categoria`) VALUES (NULL, :ptitulo, :pdescricao, :pvalor, :pcategoria);');
-            $adiciona_curso->bindValue(':ptitulo', $titulo);
-            $adiciona_curso->bindValue(':pdescricao', $descricao);
-            $adiciona_curso->bindValue(':pvalor', $valor);
-            $adiciona_curso->bindValue(':pcategoria', $categoria);
-            $adiciona_curso->execute();
-            header('location:CursosCadastro.php?curso');
-        }
+        $alterar_curso = $conecao->prepare('UPDATE `cursos` SET `titulo_curso` = :ptitulo, `descricao_curso` = :pdescricao, `valor_curso` = :pvalor, `id_categoria` = :pcategoria WHERE `cursos`.`id_curso` = :pid');
+        $alterar_curso->bindValue(':ptitulo', $titulo);
+        $alterar_curso->bindValue(':pdescricao', $descricao);
+        $alterar_curso->bindValue(':pvalor', $valor);
+        $alterar_curso->bindValue(':pcategoria', $categoria);
+        $alterar_curso->bindValue(':pid', $id);
+        $alterar_curso->execute();
+        header('location:CursosDetalhes.php?id='.$id);
     }
+
+    $id = $_GET['id'];
+    $Busca_Curso = $conecao->prepare('SELECT * FROM `cursos` WHERE `id_curso` = :pid');
+    $Busca_Curso->bindValue(':pid', $id);
+    $Busca_Curso->execute();
+    $row = $Busca_Curso->fetch();
     ?>
+
     <div class="col-lg-offset-1">
         <div class="container">
             <div class="col-sm-11">
@@ -51,27 +46,28 @@
                     }
                     ?>
                 </div>
-                <form class="form-horizontal jumbotron" action="CursosCadastro.php" method="POST">
+                <form class="form-horizontal jumbotron" action="CursosEditar.php" method="POST">
                     <fieldset>
-                        <legend>Cadastrar Curso</legend>
+                        <legend>Editar Curso</legend>
+                        <input type="hidden" name="id" value="<?php echo $row['id_curso'] ?>"/>
                         <div class="form-group">
                             <label for="titulo" class="col-lg-3 control-label">Titulo :</label>
                             <div class="col-lg-6">
-                                <input class="form-control" name="titulo" placeholder="Digite Titulo Para O Curso" type="text">
+                                <input class="form-control" name="titulo" placeholder="Digite Titulo Para O Curso" type="text" value="<?php echo $row['titulo_curso']; ?>">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="descricao" class="col-lg-3 control-label">Descrição :</label>
                             <div class="col-lg-6">
-                                <textarea class="form-control" rows="8" name="descricao" placeholder="Digite A Descrição"></textarea>
+                                <textarea class="form-control" rows="8" name="descricao" placeholder="Digite A Descrição"><?php echo $row['descricao_curso']; ?></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="valor" class="col-lg-3 control-label">Valor :</label>
                             <div class="col-lg-6">
-                                <input class="form-control" name="valor" placeholder="Digite O Valor Para O Curso" type="text">
+                                <input class="form-control" name="valor" placeholder="Digite O Valor Para O Curso" type="text" value="<?php echo $row['valor_curso']; ?>">
                                 <span class="help-block">Digite O Valor Para O Curso Em Reais.</span>
                             </div>
                         </div>
@@ -85,9 +81,17 @@
                                     $buscar_categorias = $conecao->prepare('SELECT * FROM `categoria`');
                                     $buscar_categorias->execute();
 
-                                    while ($row = $buscar_categorias->fetch()) {
-                                        echo '<option value=' . $row[id_cat] . '>' . $row[nome_cat] . '</option>';
-                                    }
+                                    while ($rows = $buscar_categorias->fetch()) {
+                                        ?>
+                                        <option value="<?php echo $rows['id_cat']; ?>"
+                                        <?php
+                                        if ($rows['id_cat'] == $row['id_categoria']) {
+                                            echo 'selected';
+                                        }
+                                        ?>>
+                                                    <?php echo $rows['nome_cat']; ?>
+                                        </option>
+                                    <?php }
                                     ?>
                                 </select>
                             </div>
@@ -96,7 +100,7 @@
 
                         <div class="form-group">
                             <div class="col-lg-12 control-label">
-                                <button type="submit" class="btn btn-success" name="cadastrarcurso">Cadastrar</button>
+                                <button type="submit" class="btn btn-success" name="alterar">Alterar</button>
                             </div>
                         </div>
                     </fieldset>

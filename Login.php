@@ -11,13 +11,18 @@
         $senha = $_POST['senha'];
         $confirmasenha = $_POST['confirmarsenha'];
 
-        if (strcmp($senha, $confirmasenha) == 0) {
-            $adiciona_login = $conecao->prepare('INSERT INTO `login` (`id_login`, `usuario_login`, `senha_login`) VALUES (NULL, :pusuario, MD5(:psenha));');
-            $adiciona_login->bindValue(':pusuario', $usuario);
-            $adiciona_login->bindValue(':psenha', $senha);
-            $adiciona_login->execute();
+        if ($usuario == NULL || $senha == NULL || $confirmasenha == NULL) {
+            header('location:login.php?alerta');
         } else {
-            header('Location:login.php?senhainvalida');
+            if (strcmp($senha, $confirmasenha) == 0) {
+                $adiciona_login = $conecao->prepare('INSERT INTO `login` (`id_login`, `usuario_login`, `senha_login`) VALUES (NULL, :pusuario, MD5(:psenha));');
+                $adiciona_login->bindValue(':pusuario', $usuario);
+                $adiciona_login->bindValue(':psenha', $senha);
+                $adiciona_login->execute();
+                header('Location:login.php?alerta');
+            } else {
+                header('Location:login.php?senhainvalida');
+            }
         }
     }
 
@@ -26,15 +31,19 @@
         $usuario = $_POST['usuario'];
         $senha = $_POST['senha'];
 
-        $procurar_login = $conecao->prepare('SELECT * FROM `login` WHERE `usuario_login` = :pusuario and `senha_login` = :psenha;');
-        $procurar_login->bindValue(':pusuario', $usuario);
-        $procurar_login->bindValue(':psenha', md5($senha));
-        $procurar_login->execute();
-
-        if ($procurar_login->rowCount() == 0) {
-            header('Location:login.php?logininvalido');
+        if ($usuario == NULL || $senha == NULL) {
+            header('Location:login.php?alerta');
         } else {
-            header('Location:index.php');
+            $procurar_login = $conecao->prepare('SELECT * FROM `login` WHERE `usuario_login` = :pusuario and `senha_login` = :psenha;');
+            $procurar_login->bindValue(':pusuario', $usuario);
+            $procurar_login->bindValue(':psenha', md5($senha));
+            $procurar_login->execute();
+
+            if ($procurar_login->rowCount() == 0) {
+                header('Location:login.php?logininvalido');
+            } else {
+                header('Location:index.php');
+            }
         }
     }
     ?>
@@ -47,6 +56,8 @@
                         echo '<div class="alert-danger form-control">A Senhas Não Conferem</div>';
                     } else if (isset($_GET['logininvalido'])) {
                         echo '<div class="alert-danger form-control">Login Invalido</div>';
+                    } else if (isset($_GET['alerta'])) {
+                        echo '<div class="alert-danger form-control">Preencha Todos Os Campos</div>';
                     }
                     ?>
                 </div>
