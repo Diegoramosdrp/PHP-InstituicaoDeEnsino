@@ -19,7 +19,7 @@
                 $adiciona_login->bindValue(':pusuario', $usuario);
                 $adiciona_login->bindValue(':psenha', $senha);
                 $adiciona_login->execute();
-                header('Location:login.php?alerta');
+                header('Location:login.php?sucesso');
             } else {
                 header('Location:login.php?senhainvalida');
             }
@@ -58,11 +58,13 @@
                         echo '<div class="alert-danger form-control">Login Invalido</div>';
                     } else if (isset($_GET['alerta'])) {
                         echo '<div class="alert-danger form-control">Preencha Todos Os Campos</div>';
+                    } elseif (isset($_GET['sucesso'])) {
+                        echo '<div class="alert-danger form-control">Cadastrado Com Successo</div>';
                     }
                     ?>
                 </div>
                 <div class="jumbotron">
-                    <form class="form-horizontal" action="login.php" method="POST" style="">
+                    <form class="form-horizontal" action="login.php" method="POST">
                         <fieldset>
                             <legend>Logar</legend>
                             <div class="form-group">
