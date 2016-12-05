@@ -18,7 +18,6 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="Cursos.php">Cursos</a></li>
                     <li class="dropdown">
                         <?php
                         $lista_categorias = $conecao->prepare('SELECT * FROM `categoria`');
@@ -29,6 +28,7 @@
                         ?>
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Cursos <span class="badge"><?php echo $conta_curso->rowCount(); ?></span><span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="Cursos.php">Todos</a></li>
                             <?php while ($row = $lista_categorias->fetch()) {
                                 ?>
                             <li><a href="Cursos.php?id=<?php echo $row['id_cat']; ?>"><?php echo $row['nome_cat'] ?></a></li>

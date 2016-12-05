@@ -25,7 +25,6 @@
             $buscar_categoria_id->bindValue(':pid', $idfiltro);
             $buscar_categoria_id->execute();
             ?>
-            <br>
             <?php
             while ($rowf = $buscar_categoria_id->fetch()) {
                 ?>

@@ -19,7 +19,6 @@
             header('location:Cursos.php');
         }
         ?>
-        <br>
         <?php
         while ($row = $lista_cursos->fetch()) {
             ?>
