@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+<?php
+include 'template.php';
+if (!isset($_SESSION['login'])) {
+    header('location:Login.php');
+}
+?>
 <head>
     <meta charset="UTF-8">
 </head>
 <body>
     <?php
-    include 'template.php';
-
-
-
-
     if (isset($_POST['alterar'])) {
         $id = $_POST['id'];
         $titulo = $_POST['titulo'];

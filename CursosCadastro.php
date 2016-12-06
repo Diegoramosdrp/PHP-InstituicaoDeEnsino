@@ -1,8 +1,13 @@
 <!DOCTYPE html>
+<?php
+include 'Template.php';
+if (!isset($_SESSION['login'])) {
+    header('location:Login.php');
+}
+?>
 <head></head>
 <body>
     <?php
-    include 'Template.php';
     //Adicionar Categoria
     if (isset($_POST['cadastrarcategoria'])) {
         $nome = $_POST['nome'];

@@ -42,10 +42,20 @@
             if ($procurar_login->rowCount() == 0) {
                 header('Location:login.php?logininvalido');
             } else {
+                session_start();
+                $row = $procurar_login->fetch();
+                $id_login = $row['id_login'];
+                $_SESSION['login'] = $id_login;
                 header('Location:index.php');
             }
         }
     }
+    
+    if (isset($_GET['logout'])) {
+		session_start();
+		session_destroy();
+		header('location: Cursos.php');
+	}
     ?>
     <div class="col-lg-offset-1">
         <div class="container">

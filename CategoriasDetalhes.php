@@ -1,10 +1,15 @@
 <!DOCTYPE html>
+<?php
+include 'template.php';
+if (!isset($_SESSION['login'])) {
+    header('location:Login.php');
+}
+?>
 <head>
     <meta charset="UTF-8">
 </head>
 <body>
     <?php
-    include 'template.php';
 
     $buscar_categorias = $conecao->prepare('SELECT * FROM `categoria`');
     $buscar_categorias->execute();

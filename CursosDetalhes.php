@@ -33,8 +33,11 @@
                 </blockquote>
                 <h5>Valor : R$ <?php echo $row['valor_curso']; ?></h5>
                 <hr>
+                <?php
+                if (!$_SESSION == NULL){?>
                 <a href="CursosEditar.php?id=<?php echo $row['id_curso']; ?>"><img src = "./Imagens/Editar.png" style="width:25px"></a>
                 <a href="Cursos.php?Excluir&id=<?php echo $row['id_curso']; ?>" ><img src = "./Imagens/Excluir.png" style="width:25px"></a>
+                <?php }?>
             </div>
         </div>
     </div>
